@@ -55,12 +55,17 @@ class HomeContent extends StatelessWidget {
 
     return Expanded(
       child: Container(
-        child: Row(
-          children: [
-            Wrap(
-              children: menus
-                  .map(
-                    (menu) => Column(
+        child: Wrap(
+          direction: Axis.horizontal,
+          children: menus
+              .map(
+                (menu) => Container(
+                  padding: EdgeInsets.all(10.0),
+                  height: _menuCardHeight,
+                  width: MediaQuery.of(context).size.width / rowCount,
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Column(
                       children: [
                         Image(
                           image: AssetImage('assets/icons/${menu['iconName']}'),
@@ -68,10 +73,10 @@ class HomeContent extends StatelessWidget {
                         Text(menu['text']),
                       ],
                     ),
-                  )
-                  .toList(),
-            ),
-          ],
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
     );
